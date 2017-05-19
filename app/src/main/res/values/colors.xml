@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ec623f</color>
+    <color name="colorPrimaryDark">#e6603f</color>
+    <color name="colorPrimary_alpha">#a6e6603f</color>
+    <color name="colorAccent">#9cbc26</color>
+    <color name="colorAccent_undo">#6c9cbc26</color>
+    <color name="textColorPrimary">#f0f0f0</color>
+    <color name="textColorPrimary_alpha">#77fafafa</color>
+    <color name="heart">#ff8a64</color>
+    <color name="colorGreenLess">#8bc34b</color>
+    <color name="colorGray">#77000000</color>
+
+    <color name="load_red">@color/colorAccent</color>
+
+    <color name="load_purple">#935fe7</color>
+
+    <color name="load_yellow">#f9b11f</color>
+
+    <color name="load_blue">#009cfa</color>
+</resources>

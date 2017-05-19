@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowNoTitle">true</item>
+        <!--避免控件都顶到状态栏上-->
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyDialogStyle" parent="Base.Theme.AppCompat.Light.Dialog">
+
+        <item name="android:windowAnimationStyle">@style/Base.Animation.AppCompat.Dialog</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="colorAccent">@color/textColorPrimary</item>
+    </style>
+
+</resources>

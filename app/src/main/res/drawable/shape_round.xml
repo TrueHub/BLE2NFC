@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+
+                <shape>
+                    <stroke android:color="@color/colorPrimary" android:width="1dp"/>
+                    <size android:width="200dp" android:height="60dp"/>
+                    <solid android:color="@color/colorPrimaryDark" />
+                    <corners android:radius="60dip"/>
+                </shape>
+
+    </item>
+    <item android:state_pressed="false">
+        <layer-list>
+            <!-- SHADOW LAYER -->
+            <item android:left="2dp" android:top="2dp">
+                <shape>
+                    <size android:width="200dp" android:height="60dp"/>
+                    <solid android:color="@color/colorGray" />
+                    <corners android:radius="60dip"/>
+                </shape>
+            </item>
+            <!-- CONTENT LAYER -->
+            <!-- 相当于padding -->
+            <item android:bottom="2dp" android:right="2dp">
+                <shape>
+                    <stroke android:color="@color/textColorPrimary" android:width="2dp"/>
+                    <size android:width="200dp" android:height="60dp"/>
+                    <solid android:color="@color/colorPrimary" />
+                    <corners android:radius="60dip"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

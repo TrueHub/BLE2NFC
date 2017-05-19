@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="连接"
+          android:id="@+id/nvg_menu_conn"
+          android:icon="@drawable/ic_connected_24dp"
+        />
+    <item android:title="查询"
+          android:id="@+id/nvg_menu_readInfo">
+        <menu>
+            <item android:title="系统信息"
+                  android:icon="@drawable/ic_device_info_24dp"
+                  android:id="@+id/nvg_sys_info"/>
+            <item android:title="单个block"
+                  android:icon="@drawable/ic_block_info_24dp"
+                  android:id="@+id/nvg_block_info_single"
+                />
+            <item android:title="提取所有信息"
+                  android:icon="@drawable/ic_all_info_24dp"
+                  android:id="@+id/nvg_read_info_all"/>
+        </menu>
+    </item>
+</menu>
