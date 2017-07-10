@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         toastUtil = new ToastUtil(getApplicationContext());
 
-        toast = Toast.makeText(this, "再次点击退出程序", Toast.LENGTH_SHORT);
+        toast = Toast.makeText(this.getApplicationContext(), "再次点击退出程序", Toast.LENGTH_SHORT);
 
     }
 
@@ -325,8 +325,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nvg_sys_info:
 
-                        toastUtil.showToastWithImg("读取系统信息",
-                                getResources().getDrawable(R.drawable.ic_device_info_toast));
+//                        toastUtil.showToastWithImg("读取系统信息",
+//                                getResources().getDrawable(R.drawable.ic_device_info_toast));
+                        toastUtil.showToast("读取系统信息");
                         EventUtil.post(new Comm2GATT(READ_SYS_INFO, 0));
                         EventUtil.post("READ_SYS_INFO");
                         break;

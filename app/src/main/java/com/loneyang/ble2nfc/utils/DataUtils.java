@@ -78,11 +78,11 @@ public class DataUtils {
      */
     public static String bytes2hex(byte[] b) {
         // String Buffer can be used instead
-        String hs = "";
+        String hs = "0x";
         String stmp = "";
 
         for (int n = 0; n < b.length; n++) {
-            stmp = (Integer.toHexString(b[n] & 0XFF));
+            stmp = (Integer.toHexString(b[n] & 0XFF)) ;
 
             if (stmp.length() == 1) {
                 hs = hs + "0" + stmp;
@@ -91,16 +91,19 @@ public class DataUtils {
             }
 
             if (n < b.length - 1) {
-                hs = hs + "";
+                hs = hs + ",0x";
             }
         }
-
         return hs;
     }
 
     public static void main(String[] args) {
 
-        long time = System.currentTimeMillis();
+        String ss = "0x00,0xc8,0xc4,0x9b,0x80,0x38,0x05,0xc8,0x54,0xe0";
+        ss = ss.substring(5 , ss.length() - 5);
+        System.out.println(ss);
+
+        /*long time = System.currentTimeMillis();
         System.out.println(time);
         byte[] long2Bytes1 = long2Bytes(time);
         for (int ix = 0; ix < long2Bytes1.length; ++ix) {
@@ -147,7 +150,7 @@ public class DataUtils {
         byte byteNum = (byte)0x45;
         System.out.print("byte为："+byteNum);
         int byte2Int = byte2Int(byteNum);
-        System.out.println("byte转行成int: " + byte2Int);
+        System.out.println("byte转行成int: " + byte2Int);*/
     }
 
 }

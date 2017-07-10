@@ -35,6 +35,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import static com.loneyang.ble2nfc.eventbeans.Comm2GATT.EventType.READ_BLOCK_INFO_SINGLE;
 import static com.loneyang.ble2nfc.eventbeans.Comm2GATT.EventType.READ_INFO_ALL;
+import static com.loneyang.ble2nfc.utils.DataUtils.bytes2hex;
 
 /**
  * Created by Dell on 2017-4-16.
@@ -222,8 +223,8 @@ public class GATTService extends Service {
                                 descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                                 gatt.writeDescriptor(descriptor);
                             }
-                            descriptorList.get(0).setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                            gatt.writeDescriptor(descriptorList.get(0));
+//                            descriptorList.get(0).setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+//                            gatt.writeDescriptor(descriptorList.get(0));
                         }
 
                         if (characteristic.getUuid().equals(ConstantPool.UUID_WRITE)) {
@@ -242,20 +243,22 @@ public class GATTService extends Service {
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            Log.d("MSL", "onCharacteristicWrite: " + status + "," + characteristic.getUuid());
+//            Log.d("MSL", "onCharacteristicWrite: " + status + "," + characteristic.getUuid());
             byte[] data = characteristic.getValue();
-            Log.d("MSL", "onCharacteristicWrite: " + DataUtils.bytes2hex(data));
+            Log.d("MSL", "onCharacteristicWrite: " + bytes2hex(data));
             readData(data);
             commandPool.onCommandCallbackComplete();
         }
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            Log.d("MSL", "onCharacteristicChanged: " + characteristic.getUuid());
+//            Log.d("MSL", "onCharacteristicChanged: " + characteristic.getUuid());
             if (characteristic.getUuid().equals(ConstantPool.UUID_NOTIFY)) {
                 commandPool.onCommandCallbackComplete();
                 byte[] data = characteristic.getValue();
-                Log.d("MSL", "onCharacteristicChanged: " + DataUtils.bytes2hex(data));
+                String dataStr = DataUtils.bytes2hex(data);
+                dataStr = dataStr.substring(5 , dataStr.length() - 5);
+                Log.d("MSL", "onCharacteristicChanged: " + dataStr);
                 readData(data);
             }
         }
@@ -270,7 +273,7 @@ public class GATTService extends Service {
         @Override
         public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             byte[] data = descriptor.getValue();
-            Log.d("MSL", "onDescriptorWrite: " + DataUtils.bytes2hex(data));
+            Log.d("MSL", "onDescriptorWrite: " + bytes2hex(data) + " , " +descriptor.getUuid() );
             commandPool.onCommandCallbackComplete();
         }
 
@@ -304,7 +307,9 @@ public class GATTService extends Service {
                 commandPool.addCommand(CommandPool.Type.write,ConstantPool.SYS_INFO,vibrationChar);
                 break;
             case READ_BLOCK_INFO_SINGLE:
-                commandPool.addCommand(CommandPool.Type.write,ConstantPool.BLOCK_INFO_SINGLE,vibrationChar);
+                byte[] single = ConstantPool.BLOCK_INFO_SINGLE;
+                single[4] = (byte) comm2GATT.getParm();
+                commandPool.addCommand(CommandPool.Type.write,single,vibrationChar);
                 break;
             case READ_INFO_ALL:
                 commandPool.addCommand(CommandPool.Type.write,ConstantPool.INFO_ALL,vibrationChar);
@@ -321,25 +326,12 @@ public class GATTService extends Service {
         }
     }
 
-/*    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void btnClick(String str) {
-        switch (str){
-            case "READ_SYS_INFO":
-                Log.d("MSL", "btnClick: sys info");
-                commandPool.addCommand(CommandPool.Type.write,ConstantPool.SYS_INFO,vibrationChar);
-                break;
-            case "READ_BLOCK_INFO_SINGLE":
-                commandPool.addCommand(CommandPool.Type.write,ConstantPool.BLOCK_INFO_SINGLE,vibrationChar);
-                break;
-            case "READ_INFO_ALL":
-                commandPool.addCommand(CommandPool.Type.write,ConstantPool.INFO_ALL,vibrationChar);
-                break;
-        }
-    }*/
-
-
     private void readData(byte[] data) {
 
     }
 
 }
+
+/*
+
+ */

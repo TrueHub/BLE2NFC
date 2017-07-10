@@ -2,8 +2,8 @@ package com.loneyang.ble2nfc.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Gravity;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,17 +24,10 @@ public class ToastUtil {
 
     public boolean showToast(String str) {
         if (toast.getView().getParent() != null) {
-            if (toast.getView().getContentDescription().equals(str)) {
-                return false;
-            } else {
-                toast.cancel();
-                toast = Toast.makeText(context, str, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        } else {
-            toast = Toast.makeText(context, str, Toast.LENGTH_SHORT);
-            toast.show();
+            toast.cancel();
         }
+        toast = Toast.makeText(context, str, Toast.LENGTH_SHORT);
+        toast.show();
         return true;
     }
 
@@ -56,7 +49,6 @@ public class ToastUtil {
         toast.setView(textView);
 
         toast.show();
-
 
         return false;
     }
